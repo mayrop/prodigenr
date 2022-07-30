@@ -57,10 +57,13 @@ include_readmes <- function(proj_name) {
         "README.md",
         data = list(ProjectName = proj_name)
     )
-    use_template("doc-README.md", "doc/README.md")
+    use_template("base-init.R", "000_init.R")
+    use_template("base-etl.R", "etl/001_dw.R")
+
+    use_template("etl-README.md", "etl/README.md")
+    use_template("reports-README.md", "reports/README.md")
     use_template("data-README.md", "data/README.md")
-    use_template("data-raw-README.md", "data-raw/README.md")
-    use_template("R-README.md", "R/README.md")
+    use_template("data-raw-README.md", "data/raw/README.md")
 }
 
 # Git setup functions -------------------------------------------
@@ -98,8 +101,10 @@ setup_with_git <- function() {
 # Utilities -----------------------------------------------------
 
 set_git_ignore_files <- function() {
-    base::writeLines(c(".Rhistory", ".RData", ".Rproj.user"),
-                     ".gitignore")
+    base::writeLines(c(".Rhistory", ".RData", ".Rproj.user"), ".gitignore")
+    base::writeLines(c(), "data/.gitkeep")
+    base::writeLines(c(), "data/raw/.gitkeep")
+    base::writeLines(c(), "reports/.gitkeep")
 }
 
 path_remove_spaces <- function(path) {
