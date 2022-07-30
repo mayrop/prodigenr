@@ -41,7 +41,7 @@ setup_project <-
     }
 
 create_directories <- function() {
-    fs::dir_create(c("R", "data", "doc", "data-raw"))
+    fs::dir_create(c("data", "etl", "data/raw", "reports"))
 }
 
 # File inclusion functions --------------------------------------
