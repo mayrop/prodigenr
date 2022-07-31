@@ -1,4 +1,4 @@
-context('Project creation and setup.')
+context("Project creation and setup.")
 skip_on_cran()
 
 new_project <- fs::path_temp("testing")

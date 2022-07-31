@@ -1,23 +1,27 @@
 #' @param prefix How to name your file
 #'
 #' @return A created `.R` file in the `etl/` folder.
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' create_etl('001_dw')
 #' create_etl('002_dw_users')
 #' }
-#' 
+#'
 #' @export
 create_etl <- function(prefix = "001") {
     if (!is_rproj_folder()) {
-        rlang::abort("The folder does not contain an `.Rproj` file. Please use this function while in the project created from `setup_project().`")
+        rlang::abort(c(
+            "The folder does not contain an `.Rproj` file.",
+            "Please use this function while in the project created from `setup_project().`"
+        ))
     }
 
-    file_name <- normalizePath(file.path('etl', paste0(prefix, ".R")), mustWork = FALSE)
-    
+    file_name <- normalizePath(file.path("etl", paste0(prefix, ".R")), mustWork = FALSE)
+
     if (file.exists(file_name)) {
-        rlang::abort(paste0("The file '", paste0(prefix, ".R"), " already exists in the etl folder."))
+        msg <- paste0("The file '", paste0(prefix, ".R"), " already exists in the etl folder.")
+        rlang::abort(msg)
     } else {
         use_template("base-etl.R", file_name)
         cli::cli_alert_success("Creating an etl file.")

@@ -1,7 +1,8 @@
 #------------------------------------------
-# https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/#subsection5-6
+# https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/
 # nolint start
-# install.packages("~/{root}/src/packages/almond_0.0.0.9000.tar.gz", repos = NULL, type="source")
+# install.packages("~/{root}/src/packages/almond_0.0.0.9000.tar.gz", 
+# repos = NULL, type="source")
 
 # renv::init()
 renv::restore()

@@ -82,12 +82,17 @@ include_readmes <- function(proj_name) {
 #'
 setup_with_git <- function() {
     if (!requireNamespace("gert", quietly = TRUE)) {
-        rlang::abort(c("This function relies on the gert package, please install it and then run the function again.",
+        rlang::abort(c("This function relies on the gert package, ",
+                       "please install it and then run the function again.",
                        "install.packages('gert')"))
     }
 
-    if (!is_rproj_folder())
-        rlang::abort("The folder does not contain an `.Rproj` file. Please use this function while in the project created from `setup_project().`")
+    if (!is_rproj_folder()) {
+        rlang::abort(c(
+            "The folder does not contain an `.Rproj` file.",
+            "Please use this function while in the project created from `setup_project().`"
+        ))
+    }
 
     if (has_git()) {
         rlang::abort("The project already has Git added.")

@@ -6,7 +6,7 @@ almond::reset_mysql_connections()
 almond::list_mysql_connections()
 
 # Create DB Connection
-conn = almond::db_model$new(
+conn <- almond::db_model$new(
   list(
     host = "x",
     user = "x",
