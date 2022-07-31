@@ -57,13 +57,14 @@ include_readmes <- function(proj_name) {
         "README.md",
         data = list(ProjectName = proj_name)
     )
+
+    set_git_ignore_files()
+
     use_template("base-init.R", "000_init.R")
     use_template("base-etl.R", "etl/001_dw.R")
 
     use_template("etl-README.md", "etl/README.md")
-    use_template("reports-README.md", "reports/README.md")
     use_template("data-README.md", "data/README.md")
-    use_template("data-raw-README.md", "data/raw/README.md")
 }
 
 # Git setup functions -------------------------------------------
