@@ -2,5 +2,3 @@
 
 export(create_etl)
 export(setup_project)
-export(setup_with_git)
-export(template_list)

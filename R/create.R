@@ -1,3 +1,5 @@
+#' Create a standarized file inside the etl folder
+#'
 #' @param prefix How to name your file
 #'
 #' @return A created `.R` file in the `etl/` folder.
@@ -23,19 +25,8 @@ create_etl <- function(prefix = "001") {
         msg <- paste0("The file '", paste0(prefix, ".R"), " already exists in the etl folder.")
         rlang::abort(msg)
     } else {
-        use_template("base-etl.R", file_name)
-        cli::cli_alert_success("Creating an etl file.")
+        usethis::use_template("etl.R", file_name)
+        cli::cli_alert_success(paste0("Created an etl file: ", file_name))
     }
     invisible()
 }
-
-#' List project templates within \pkg{prodigenr}.
-#'
-#' Get a list of available templates in a package.
-#'
-#' @return Vector of templates available
-#' @export
-#' @examples
-#' template_list
-#'
-template_list <- c("etl")

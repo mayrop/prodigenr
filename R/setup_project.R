@@ -11,10 +11,8 @@
 #' @examples
 #' \dontrun{
 #' # Use a temporary location
-#' new_proj_name <- fs::path_temp("DiabetesCancer")
+#' new_proj_name <- fs::path_temp("my_project")
 #' setup_project(new_proj_name)
-#' # After the new project opens up, add Git with:
-#' setup_with_git()
 #' }
 setup_project <-
     function(path) {
@@ -35,83 +33,46 @@ setup_project <-
                 add_rproj_file(proj_name)
                 add_description_file(proj_name)
                 create_directories()
+                add_git_ignore_files()
+                add_r_scripts()
                 include_readmes(proj_name)
-                use_template("TODO.md")
             })
     }
+
+# Create files ------------------------------------------------
 
 create_directories <- function() {
     fs::dir_create(c("data", "etl", "data/raw", "reports"))
 }
 
-# File inclusion functions --------------------------------------
-
 add_description_file <- function(proj_name) {
-    use_template("basic-description", "DESCRIPTION",
+    usethis::use_template("DESCRIPTION", "DESCRIPTION",
                  data = list(ProjectName = proj_name))
 }
 
+add_r_scripts <- function(proj_name) {
+    usethis::use_template("init.R", "init.R")
+    usethis::use_template("etl.R", "etl/001_dw.R")
+}
+
 include_readmes <- function(proj_name) {
-    use_template(
-        "base-README.md",
+    usethis::use_template(
+        "README.md",
         "README.md",
         data = list(ProjectName = proj_name)
     )
 
-    set_git_ignore_files()
-
-    use_template("base-init.R", "000_init.R")
-    use_template("base-etl.R", "etl/001_dw.R")
-
-    use_template("etl-README.md", "etl/README.md")
-    use_template("data-README.md", "data/README.md")
+    usethis::use_template("data_README.md", "data/README.md")
 }
 
-# Git setup functions -------------------------------------------
-
-#' Setup Git to the project.
-#'
-#' Takes a lot of inspiration from the usethis `use_git()` function, except
-#' it only adds Git and nothing more (doesn't commit, doesn't restart RStudio
-#' automatically). Must run this function inside the project you created from
-#' [setup_project()]
-#'
-#' @return Adds Git and `.gitignore` file to the project.
-#' @export
-#' @seealso [setup_project()] for starting the project.
-#'
-setup_with_git <- function() {
-    if (!requireNamespace("gert", quietly = TRUE)) {
-        rlang::abort(c("This function relies on the gert package, ",
-                       "please install it and then run the function again.",
-                       "install.packages('gert')"))
-    }
-
-    if (!is_rproj_folder()) {
-        rlang::abort(c(
-            "The folder does not contain an `.Rproj` file.",
-            "Please use this function while in the project created from `setup_project().`"
-        ))
-    }
-
-    if (has_git()) {
-        rlang::abort("The project already has Git added.")
-    }
-
-    gert::git_init()
-    set_git_ignore_files()
-    cli::cli_alert_info("You'll need to restart RStudio to see the Git pane.")
-    return(invisible(NULL))
+add_git_ignore_files <- function() {
+    base::writeLines(c(".Rhistory", ".RData", ".Rproj.user"), ".gitignore")
+    base::writeLines(c(""), "data/.gitkeep")
+    base::writeLines(c(""), "data/raw/.gitkeep")
+    base::writeLines(c(""), "reports/.gitkeep")
 }
 
 # Utilities -----------------------------------------------------
-
-set_git_ignore_files <- function() {
-    base::writeLines(c(".Rhistory", ".RData", ".Rproj.user"), ".gitignore")
-    base::writeLines(c(), "data/.gitkeep")
-    base::writeLines(c(), "data/raw/.gitkeep")
-    base::writeLines(c(), "reports/.gitkeep")
-}
 
 path_remove_spaces <- function(path) {
     path_as_vector <- fs::path_split(path)[[1]]

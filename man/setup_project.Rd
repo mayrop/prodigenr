@@ -19,9 +19,7 @@ as well as adding some useful files to start the project.
 \examples{
 \dontrun{
 # Use a temporary location
-new_proj_name <- fs::path_temp("DiabetesCancer")
+new_proj_name <- fs::path_temp("my_project")
 setup_project(new_proj_name)
-# After the new project opens up, add Git with:
-setup_with_git()
 }
 }
