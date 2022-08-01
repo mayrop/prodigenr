@@ -25,7 +25,7 @@ create_etl <- function(prefix = "001") {
         msg <- paste0("The file '", paste0(prefix, ".R"), " already exists in the etl folder.")
         rlang::abort(msg)
     } else {
-        usethis::use_template("etl.R", file_name)
+        usethis::use_template("etl.R", file_name, package = "prodigenr")
         cli::cli_alert_success(paste0("Created an etl file: ", file_name))
     }
     invisible()
