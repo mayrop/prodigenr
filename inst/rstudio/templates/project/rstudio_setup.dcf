@@ -1,4 +1,4 @@
 Binding: rstudio_setup
 Title: Custom Project
-OpenFiles: README.md
+OpenFiles: init.R, etl/001_dw.R
 
