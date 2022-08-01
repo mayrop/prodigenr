@@ -46,23 +46,23 @@ create_directories <- function() {
 }
 
 add_description_file <- function(proj_name) {
-    usethis::use_template("DESCRIPTION", "DESCRIPTION",
+    use_template("DESCRIPTION", "DESCRIPTION",
                  data = list(ProjectName = proj_name))
 }
 
 add_r_scripts <- function(proj_name) {
-    usethis::use_template("init.R", "init.R")
-    usethis::use_template("etl.R", "etl/001_dw.R")
+    use_template("init.R", "init.R")
+    use_template("etl.R", "etl/001_dw.R")
 }
 
 include_readmes <- function(proj_name) {
-    usethis::use_template(
+    use_template(
         "README.md",
         "README.md",
         data = list(ProjectName = proj_name)
     )
 
-    usethis::use_template("data_README.md", "data/README.md")
+    use_template("data_README.md", "data/README.md")
 }
 
 add_git_ignore_files <- function() {
