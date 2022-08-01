@@ -52,7 +52,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("rostools/prodigenr")
+remotes::install_github("mayrop/prodigenr")
 ```
 
 ## Usage
