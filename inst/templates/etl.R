@@ -1,4 +1,4 @@
-source("../000_init.R")
+source("init.R")
 
 # Reset connections
 almond::reset_mysql_connections()
