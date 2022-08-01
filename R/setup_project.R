@@ -46,7 +46,7 @@ create_directories <- function() {
 }
 
 add_description_file <- function(proj_name) {
-    use_template("DESCRIPTION", "DESCRIPTION",
+    use_template("basic-description", "DESCRIPTION",
                  data = list(ProjectName = proj_name))
 }
 
