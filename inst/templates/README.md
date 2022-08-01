@@ -9,3 +9,8 @@ This project...
 - `etl/`:
 - `reports/`:
 - `data/`:
+
+Before doing anything, run:
+`renv::init()` 
+
+in the console.

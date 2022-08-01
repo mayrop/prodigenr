@@ -21,3 +21,8 @@ df <- conn$query(query)
 
 load(paste0(data_path, "file.Rda"))
 load(paste0(raw_data_path, "raw.Rda"))
+
+iris %>% dplyr::select(Sepal.Length)
+x <- data.table::setDT(data.frame(1,2))
+
+load(paste0(data_path, "raw.Rda"))
